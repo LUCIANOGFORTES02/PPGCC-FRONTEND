@@ -1,5 +1,5 @@
 import { useApi } from "@/hooks/useApi";
-import { Producoes } from "@/types/producoes";
+// import { Producoes } from "@/types/producoes";
 import { useEffect, useState } from "react";
 import {
     Select,
@@ -17,7 +17,7 @@ import {
 //export default function SelectProducoes() {
     const api = useApi()
 
-    const [producoes,setProducoes] = useState<Producoes[]>([])//Armazena os dados para download
+    // const [producoes,setProducoes] = useState<Producoes[]>([])//Armazena os dados para download
     const [tipoProducoes, setTipoProducoes] = useState<string[]>([]);
     const [selectedTipos, setSelectedTipos] = useState<string[]>([]);
   
@@ -38,7 +38,7 @@ import {
             }
             currentPage++;
           } 
-          setProducoes(allProducoes);
+          // setProducoes(allProducoes);
           //Extrair o tipos das produções
           //Set estrutura que armazena valores únicos
           const tiposUnicos = [...new Set(allProducoes.map((producoes:any)=>producoes.tipo))]

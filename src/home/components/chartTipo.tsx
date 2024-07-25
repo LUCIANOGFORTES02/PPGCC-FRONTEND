@@ -12,7 +12,6 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
-import { SelectProducoes } from '@/filtros/selectProducoes';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -23,10 +22,9 @@ export default function ChartTipo() {
     
   const [producoes,setProducoes] = useState<any[]>([])//Armazena os dados para download
   const [filteredProducoes, setFilteredProducoes] = useState<any[]>([]);
-  const [selectedTipos, setSelectedTipos] = useState<string[]>([]);
   const [startYear, setStartYear] = useState<number | null>(null);
   const [endYear, setEndYear] = useState<number | null>(null);
-  const [availableYears, setAvailableYears] = useState<number[]>([]);
+  //const [availableYears, setAvailableYears] = useState<number[]>([]);
   const [availableTypes, setAvailableTypes] = useState<string[]>([]);
 
   const options: ApexOptions = {
@@ -121,9 +119,9 @@ export default function ChartTipo() {
             }        
             setProducoes(allProducoes);
             //Extrair anos e tipos disponíveis e transforma em um array
-            const anos = Array.from(new Set(allProducoes.map((item: any) => item.ano))).sort();
+            //const anos = Array.from(new Set(allProducoes.map((item: any) => item.ano))).sort();
             const tipos = Array.from(new Set(allProducoes.map((item: any) => item.tipo.toUpperCase())));
-            setAvailableYears(anos.map(Number));
+            //setAvailableYears(anos.map(Number));
             setAvailableTypes(tipos);
 
           } catch (error) {
@@ -134,16 +132,15 @@ export default function ChartTipo() {
     
       },[]);
     
-      const handleFiltroProducoesChange = (selected: string[]) => {
-        setSelectedTipos(selected);
-      };
+      //  const handleFiltroProducoesChange = (selected: string[]) => {
+      //    setSelectedTipos(selected);
+      //  };
 
 
       useEffect(() => {
         // Aplicar filtros sempre que as seleções mudarem
         const applyFilters = () => {
           const filtered = producoes.filter(producao => 
-            (selectedTipos.length === 0 || selectedTipos.includes(producao.tipo)) &&
             (startYear === null || producao.ano >= startYear) &&
             (endYear === null || producao.ano <= endYear)
             
@@ -152,7 +149,7 @@ export default function ChartTipo() {
         };
     
         applyFilters();
-      }, [selectedTipos, startYear, endYear, producoes]);
+      }, [startYear, endYear, producoes]);
 
       //Dados para o gráfico
       const tipos = Array.from(new Set(filteredProducoes.map(item => item.tipo)));
